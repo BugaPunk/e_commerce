@@ -15,5 +15,6 @@ public class UsuarioDTO {
     private String email;
     private String nombre;
     private String apellido;
+    private String password;
     private Set<String> roles = new HashSet<>();
 }
