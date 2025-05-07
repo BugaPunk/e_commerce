@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="in"
+                 name="Instance Name" start-page="index.md">
+
+    <toc-element topic="README.md"/>
+    <toc-element topic="HELP.md"/>
+    <toc-element toc-title="docs">
+        <toc-element topic="index.md"/>
+        <toc-element topic="api_documentation.md"/>
+        <toc-element toc-title="api">
+            <toc-element topic="documentacion_api.md"/>
+        </toc-element>
+        <toc-element toc-title="endpoints">
+            <toc-element topic="endpoints_unidad_tematica.md"/>
+            <toc-element topic="endpoints_estudiante.md"/>
+            <toc-element topic="endpoints_evaluacion_docente.md"/>
+            <toc-element topic="endpoints_materia.md"/>
+        </toc-element>
+        <toc-element toc-title="proyecto">
+            <toc-element topic="dependencias.md"/>
+            <toc-element topic="configuracion.md"/>
+            <toc-element topic="vision_general.md"/>
+        </toc-element>
+        <toc-element toc-title="anotaciones">
+            <toc-element topic="anotaciones_lombok.md"/>
+            <toc-element topic="anotaciones_spring.md"/>
+            <toc-element topic="anotaciones_jackson.md"/>
+            <toc-element topic="anotaciones_jpa.md"/>
+            <toc-element topic="anotaciones_validacion.md"/>
+        </toc-element>
+    </toc-element>
+</instance-profile>

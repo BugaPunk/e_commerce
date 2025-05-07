@@ -53,10 +53,6 @@ Herramientas para que los vendedores gestionen sus tiendas y productos.
 
 La plataforma expone una API REST completa para interactuar con todas las funcionalidades. A continuación se presenta un resumen de los principales endpoints:
 
-### Endpoints de Configuración Inicial
-- `POST /api/init/roles`: Inicializa los roles básicos del sistema
-- `POST /api/auth-simple/registro`: Versión simplificada del registro de usuarios para pruebas
-
 ### Autenticación
 - `POST /api/auth/registro`: Registra un nuevo usuario
 - `POST /api/auth/login`: Inicia sesión
@@ -100,8 +96,7 @@ La plataforma expone una API REST completa para interactuar con todas las funcio
 
 ## Documentación Completa
 
-Para una documentación detallada de la API, consulte el archivo [Writerside/topics/api_documentation.md](Writerside/topics/api_documentation.md).
-
+Para una documentación detallada de la API, consulte el archivo [docs/api_documentation.md](api_documentation.md).
 
 ## Configuración y Ejecución
 
