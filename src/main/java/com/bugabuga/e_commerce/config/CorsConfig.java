@@ -17,17 +17,19 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        
-        // Permitir solicitudes desde cualquier origen
+
+        // Permitir solicitudes desde orígenes específicos
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
+
+        // No se puede usar "*" con allowCredentials=true, usamos allowedOriginPatterns
+        config.addAllowedOriginPattern("*"); // En producción, especificar dominios concretos
+
         config.addAllowedHeader("*");
-        config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        
+        config.addExposedHeader("Authorization"); // Exponer el header de Authorization
+
+        // Permitir todos los métodos HTTP comunes
+        config.addAllowedMethod("*");
+
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
