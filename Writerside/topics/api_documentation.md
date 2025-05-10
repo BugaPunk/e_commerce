@@ -64,6 +64,39 @@ http://localhost:8080/api/auth-simple/login-alt?email=usuario@ejemplo.com&passwo
 
 **Nota:** Antes de usar estos endpoints, asegúrate de haber inicializado los roles con el endpoint `/api/init/roles`.
 
+## Endpoints de Monitoreo y Diagnóstico
+
+Estos endpoints proporcionan información sobre el estado y rendimiento del sistema.
+
+### Verificación de Conectividad
+**Endpoint:** `GET /api/test/ping`
+
+**Descripción:** Endpoint simple para verificar que la API está funcionando.
+
+**Respuesta:**
+```json
+{
+  "status": "success",
+  "message": "API is running",
+  "timestamp": 1621234567890
+}
+```
+
+### Estadísticas de Caché
+**Endpoint:** `GET /api/monitor/cache`
+
+**Descripción:** Obtiene estadísticas de uso de las cachés del sistema.
+
+### Limpiar Cachés
+**Endpoint:** `POST /api/monitor/cache/clear`
+
+**Descripción:** Limpia todas las cachés del sistema.
+
+### Información del Sistema
+**Endpoint:** `GET /api/monitor/system`
+
+**Descripción:** Obtiene información sobre el sistema, incluyendo uso de memoria, tiempo de ejecución y configuración de JVM.
+
 ## Resumen de Endpoints
 
 ### Autenticación
@@ -107,6 +140,12 @@ http://localhost:8080/api/auth-simple/login-alt?email=usuario@ejemplo.com&passwo
 - `DELETE /api/admin/tiendas/{id}`: Desactiva una tienda
 - `POST /api/admin/tiendas/{tiendaId}/productos`: Agrega un producto a una tienda
 
+### Monitoreo
+- `GET /api/test/ping`: Verifica que la API está funcionando
+- `GET /api/monitor/cache`: Obtiene estadísticas de caché
+- `POST /api/monitor/cache/clear`: Limpia todas las cachés
+- `GET /api/monitor/system`: Obtiene información del sistema
+
 ## Documentación Completa
 
 Esta es una versión resumida de la documentación de la API. Para ver la documentación completa y detallada, incluyendo ejemplos de request y response para cada endpoint, consulte el archivo [docs/api_documentation.md](../../docs/api_documentation.md) en el repositorio de GitHub.
@@ -126,3 +165,5 @@ Al desarrollar el frontend para esta API, tenga en cuenta lo siguiente:
 5. **Estado del carrito**: Mantenga el estado del carrito sincronizado con el servidor para evitar inconsistencias.
 
 6. **Reactividad**: Actualice la interfaz de usuario inmediatamente después de acciones como agregar al carrito, enviar una reseña, etc., para proporcionar retroalimentación instantánea al usuario.
+
+7. **Monitoreo**: Utilice los endpoints de monitoreo para diagnosticar problemas de rendimiento y verificar el estado del sistema.

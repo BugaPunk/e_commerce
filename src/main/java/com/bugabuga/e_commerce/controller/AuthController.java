@@ -1,5 +1,6 @@
 package com.bugabuga.e_commerce.controller;
 
+import com.bugabuga.e_commerce.model.dto.ApiResponse;
 import com.bugabuga.e_commerce.model.dto.UsuarioDTO;
 import com.bugabuga.e_commerce.security.JwtTokenUtil;
 import com.bugabuga.e_commerce.service.UsuarioService;
