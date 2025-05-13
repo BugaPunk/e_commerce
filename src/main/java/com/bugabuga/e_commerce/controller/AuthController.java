@@ -15,8 +15,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth/jwt")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -113,6 +112,54 @@ public class AuthController {
                     .body(ApiResponse.error(e.getMessage()));
         } catch (Exception e) {
             logger.error("[AUTH] Error en registro: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.error("Ocurrió un error al procesar la solicitud"));
+        }
+    }
+
+    @GetMapping("/perfil")
+    public ResponseEntity<ApiResponse<?>> obtenerPerfilUsuario(@RequestParam Long usuarioId) {
+        long inicio = System.currentTimeMillis();
+        logger.info("[AUTH] Inicio obtenerPerfilUsuario: {}", inicio);
+
+        try {
+            UsuarioDTO usuario = usuarioService.obtenerUsuarioPorId(usuarioId);
+
+            long fin = System.currentTimeMillis();
+            logger.info("[AUTH] Fin obtenerPerfilUsuario: {} (Duración: {} ms)", fin, (fin-inicio));
+
+            return ResponseEntity.ok(ApiResponse.success("Perfil obtenido exitosamente", usuario));
+        } catch (IllegalArgumentException e) {
+            logger.warn("[AUTH] Error al obtener perfil: {}", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error(e.getMessage()));
+        } catch (Exception e) {
+            logger.error("[AUTH] Error en obtenerPerfilUsuario: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.error("Ocurrió un error al procesar la solicitud"));
+        }
+    }
+
+    @PutMapping("/perfil/{id}")
+    public ResponseEntity<ApiResponse<?>> actualizarPerfilUsuario(
+            @PathVariable Long id,
+            @Valid @RequestBody UsuarioDTO usuarioDTO) {
+        long inicio = System.currentTimeMillis();
+        logger.info("[AUTH] Inicio actualizarPerfilUsuario: {}", inicio);
+
+        try {
+            UsuarioDTO usuarioActualizado = usuarioService.actualizarUsuario(id, usuarioDTO);
+
+            long fin = System.currentTimeMillis();
+            logger.info("[AUTH] Fin actualizarPerfilUsuario: {} (Duración: {} ms)", fin, (fin-inicio));
+
+            return ResponseEntity.ok(ApiResponse.success("Perfil actualizado exitosamente", usuarioActualizado));
+        } catch (IllegalArgumentException e) {
+            logger.warn("[AUTH] Error al actualizar perfil: {}", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(ApiResponse.error(e.getMessage()));
+        } catch (Exception e) {
+            logger.error("[AUTH] Error en actualizarPerfilUsuario: {}", e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.error("Ocurrió un error al procesar la solicitud"));
         }
